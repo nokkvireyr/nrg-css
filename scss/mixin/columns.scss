@@ -1,0 +1,122 @@
+@mixin columnDefault() {
+    position: relative;
+    width: 100%;
+    @include borderbox;
+}
+@mixin makeColumn($s, $a) {
+    flex: 0 0 percentage($s / $a);
+    max-width: percentage($s / $a);
+    padding-left: 6px;
+    padding-right: 6px;
+}
+@mixin noPadding() {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@mixin columns($col: $columns_count) {
+    .rows {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -6px;
+        margin-right: -6px;
+        @include borderbox;
+    }
+    .btn-joint {
+        .col {
+            @include noPadding();
+        }
+    }
+    .col {
+        flex: 1 0 auto;
+        width: auto;
+        max-width: 100%;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    @include media_queries($xs) {
+        .col {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        .btn-joint {
+            div, li, ul {
+                .btn {
+                    @include radius($default_radius !important);
+                }  
+            }
+        }
+    }
+    @for $i from 1 through $columns_count {
+        .col-#{$i} {
+            @include makeColumn($i, $columns_count);
+        }
+        .btn-joint {
+            .col-#{$i} {
+                @include noPadding();
+            }
+        }
+        @include media_queries($s) {
+            .btn-joint {
+                .col-#{$i} {
+                    @include makeColumn($i, $columns_count);
+                    .btn {
+                        @include radius($default_radius !important);
+                    } 
+                }
+            }
+            .col-#{$i} {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+    @each $index, $value in $media_points {
+        @for $i from 1 through $columns_count {
+            .col-#{$index} {
+                flex: 1 0 auto;
+                width: auto;
+                max-width: 100%;
+                padding: 0 6px;
+            }
+            .col-#{$index}-#{$i} {
+                @include makeColumn($i, $columns_count);
+            }
+            .btn-joint {
+                .col-#{$index} {
+                    @include noPadding();
+                }
+                .col-#{$index}-#{$i} {
+                    @include noPadding();
+                }
+            }
+            @if ($index != 'xs') {
+                @include media_queries($value) {
+                    .col-#{$index}-#{$i} {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
+                    .col-#{$index} {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
+                    .btn-joint {
+                        .col-#{$index} {
+                            .btn {
+                                @include radius($default_radius !important);
+                            }
+                        }
+                        .col-#{$index}-#{$i} {
+                            .btn {
+                                @include radius($default_radius !important);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    
+}

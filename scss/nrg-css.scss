@@ -1,61 +1,18 @@
+@import 'variables';
+@import 'mixin/inputs';
+@import 'mixin/borders';
+@import 'mixin/media_queries';
+@import 'mixin/transition';
+@import 'mixin/columns';
+@import 'mixin/buttons';
+@import 'mixin/functions';
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 * {
     margin:0;padding: 0;
     outline: none;
     border: none;
 }
-$font-family-sans-serif:-apple-system, BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-
-//Colors
-$default-text-color: #323232;
-$prime-color: #3a95ea;
-$prime-color-hover: #388cdb;
-$prime-color-active: #3481ca;
-//Success
-$success-color: #52ba44;
-$success-color-hover: #52b442;
-$success-color-active: #4daa3f;
-//Danger
-$alert-color: #d83838;
-$alert-color-hover: #c93636;
-$alert-color-active: #b63232;
-
-//Media Sizes
-$xlg: 1500px;
-$lg: 1200px;
-$md: 992px;
-$sm: 768px;
-$xsm: 576px;
-$screenBorder: 24px;
-@mixin borderbox {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-@mixin media_queries($size) {
-	@media screen and (max-width: $size) {
-		@content;
-	}
-}
-@mixin transition($w...) {
-    -o-transition:$w;
-	-ms-transition:$w;
-	-moz-transition:$w;
-	-webkit-transition:$w;
-    transition: $w;
-}
-@mixin radius($radius...) {
-    -webkit-border-radius: $radius;
-    -moz-border-radius: $radius;
-    border-radius: $radius;
-}
-@mixin placeholder {
-    &::-webkit-input-placeholder {@content;}
-    &::-moz-placeholder {@content;}
-    &:-moz-placeholder {@content;}
-    &:-ms-input-placeholder {@content;}
-}
-
-
 //HTML Element
 html {
     font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;
@@ -73,45 +30,47 @@ h1,h2,h3,h3,p {
     @include borderbox;
 }
 a {
-    color: #2096db;
+    color: $prime-color;
     text-decoration: none;
     @include transition(color 0.2s);
     &:hover {
         text-decoration: underline;
-        color: #1e8ccc;
+        color: $prime-color-hover;
     }
 }
 
 //Container
 .container {
-    width: calc(#{$xlg} - #{$screenBorder});
+    width: calc(#{$xxl} - #{$screenBorder});
     margin: 0 auto;
+    padding: 0;
     @include borderbox;
 }
-@include media_queries($xlg) {
+@include media_queries_max($xxl) {
     .container {
-        width: calc(#{$lg} - #{$screenBorder});
+        width: calc(#{$xl} - #{$screenBorder});
     }
 }
-@include media_queries($lg) {
+@include media_queries_max($xl) {
     .container {
-        width: calc(#{$md} - #{$screenBorder});
+        width: calc(#{$l} - #{$screenBorder});
     }
 }
-@include media_queries($md) {
+@include media_queries_max($l) {
     .container {
-        width: calc(#{$sm} - #{$screenBorder});
+        width: calc(#{$m} - #{$screenBorder});
     }
 }
-@include media_queries($sm) {
+@include media_queries_max($m) {
     .container {
+        margin: 0;
         width: 100%;
     }
 }
 $inline-block-height: 41px;
 //form
 
-.form-nrg {
+/*.form-nrg {
     width: 100%;
     &.form-inline {
         display: flex;
@@ -202,7 +161,7 @@ $inline-block-height: 41px;
         }
     }
 }
-@include media_queries($md) {
+@include media_queries($m) {
     .form-nrg {
         @include borderbox;
         &.form-inline {
@@ -212,11 +171,11 @@ $inline-block-height: 41px;
             }
         }
     }
-}
+}*/
 
 //Buttons
-$default_radius: 0.3rem;
-.btn-nrg {
+
+/*.btn-nrg {
     padding: 0 12px;
     @include radius($default_radius);
     cursor: pointer;
@@ -341,160 +300,7 @@ $default_radius: 0.3rem;
             }
         }
     }
-}
+}*/
+@include columns();
 
-
-
-//Grid
-.container-flow {
-    width: 100%;
-    padding-right: -6px;
-    padding-left: -6px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.rows {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right:-6px;
-    margin-left: -6px;
-}
-.row-fill {
-    flex-direction: row !important;
-    align-items: stretch !important;
-}
-.col {
-    position: relative;
-    width: 100%;
-    padding-right: 6px;
-    padding-left: 6px;
-    @include borderbox;
-}
-.c {
-    background-color:#fafafa;
-    &:nth-child(odd) {
-        background-color: #eaeaea;
-        border: 1px solid #aeaeae;
-    }
-    padding: 12px 6px;
-}
-.cols {
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width:100%;
-}
-
-.col-100 {
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-.col-75 {
-    flex: 0 0 75%;
-    max-width: 75%;
-}
-.col-50 {
-    flex: 0 0 50%;
-    max-width: 50%;
-}
-.col-33 {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-}
-.col-25 {
-    flex: 0 0 25%;
-    max-width: 25%;
-}
-.col-15 {
-    flex: 0 0 15%;
-    max-width: 15%;
-}
-.col-12-5 {
-    flex: 0 0 12.5%;
-    max-width: 12.5%;
-}
-.col-8-3 {
-    flex: 0 0 8.3333333333%;
-    max-width: 8.3333333333%;
-}
-.col-auto {
-    flex: 1 0 auto;
-    width: auto;
-    max-width: 100%;
-}
-.col-joint {
-    padding-left: 0;
-    padding-right: 0;
-    .btn-nrg {
-        @include radius(0px 0px 0px 0px);
-    }
-    &:first-child {
-        padding-left: 6px;
-        .btn-nrg {
-            @include radius($default_radius 0px 0px $default_radius);
-        }
-    }
-    &:last-child {
-        padding-right: 6px;
-        .btn-nrg {
-            @include radius(0 $default_radius $default_radius 0);
-        }
-    }
-}
-.col-no-margin {
-    margin-bottom: 0 !important;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-}
-.col-no-padding {
-    padding-bottom: 0 !important;
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-}
-@include media_queries($md) {
-    .col-md {
-        flex: 0 0 100%;
-        max-width: 100%;
-        &.col-joint {
-            padding-right: 6px;
-            padding-left: 6px;
-            .btn-nrg {
-                @include radius($default_radius $default_radius $default_radius $default_radius);
-                &:first-child {
-                    @include radius($default_radius $default_radius $default_radius $default_radius);
-                }
-                &:last-child {
-                    @include radius($default_radius $default_radius $default_radius $default_radius);
-                }
-            }
-        }
-    }
-}
-@include media_queries($sm) {
-    .rows {
-        margin-right: 0;
-        margin-left: 0;
-    }
-    .col {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-    }
-    .col-no-margin {
-        margin-bottom: 0 !important;
-    }
-    .col-joint {
-        padding-right: 6px;
-        padding-left: 6px;
-        .btn-nrg {
-            @include radius($default_radius $default_radius $default_radius $default_radius);
-            &:first-child {
-                @include radius($default_radius $default_radius $default_radius $default_radius);
-            }
-            &:last-child {
-                @include radius($default_radius $default_radius $default_radius $default_radius);
-            }
-        }
-    }
-}
+@include makeButtons();

@@ -1,0 +1,72 @@
+
+
+//Fonts
+$font-family-sans-serif:-apple-system, BlinkMacSystemFont,'Lato' ,"Roboto","Helvetica Neue", Arial, sans-serif,"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+//Colors
+$default-text-color: #323232;
+$prime-color: #3a95ea;
+$prime-color-hover: #388cdb;
+$prime-color-active: #3481ca;
+//Success
+$success-color: #52ba44;
+$success-color-hover: #52b442;
+$success-color-active: #4daa3f;
+//Danger
+$alert-color: #d83838;
+$alert-color-hover: #c93636;
+$alert-color-active: #b63232;
+
+//Media Sizes
+$xs: 0;
+$s: 576px;
+$m: 768px;
+$l: 992px;
+$xl: 1200px;
+$xxl: 1500px;
+
+//Colors
+$colors:(
+  prime: (
+    default: $prime-color,
+    hover: $prime-color-hover,
+    active: $prime-color-active,
+    text-color: #fff
+  ),
+  success: (
+    default: $success-color,
+    hover: $success-color-hover,
+    active: $success-color-active,
+    text-color: #fff
+  ),
+  alert: (
+    default: $alert-color,
+    hover: $alert-color-hover,
+    active: $alert-color-active,
+    text-color: #fff
+  )
+);
+//Buttons
+$input-sizes: (
+  s: 32px,
+  m: 42px,
+  l: 52px,
+);
+$default_radius: 0.3rem;
+$input-side-padding: 12px;
+$input-font-size: 1.05rem;
+
+//Columns
+$media_points: (
+  xs: 0,
+  s: 576px,
+  m: 768px,
+  l: 992px,
+  xl: 1200px,
+  xxl: 1500px
+) !default;
+
+$columns_count: 10 !default;
+
+$screenBorder: 24px;
+

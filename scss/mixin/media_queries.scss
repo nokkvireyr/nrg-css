@@ -1,0 +1,10 @@
+@mixin media_queries($size) {
+	@media screen and (max-width: $size) {
+		@content;
+	}
+}
+@mixin media_queries_max($size) {
+	@media screen and (max-width: $size) {
+		@content;
+	}
+}
