@@ -10,8 +10,8 @@
     padding-right: 6px;
 }
 @mixin noPadding() {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 @mixin columns($col: $columns_count) {
@@ -22,9 +22,15 @@
         margin-left: -6px;
         margin-right: -6px;
         @include borderbox;
+        &.content-center {
+            justify-content: center;
+        }
     }
     .btn-joint {
         .col {
+            @include noPadding();
+        }
+        .col-fit {
             @include noPadding();
         }
     }
@@ -35,11 +41,19 @@
         padding-left: 6px;
         padding-right: 6px;
     }
+    .col-fit {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
     @include media_queries($xs) {
-        .col {
+        .col, .col-fit {
             flex: 0 0 100%;
             max-width: 100%;
         }
+
         .btn-joint {
             div, li, ul {
                 .btn {

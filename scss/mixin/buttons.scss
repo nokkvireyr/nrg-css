@@ -15,6 +15,42 @@
         max-width: 100%;
         min-width: 100%;
     }
+    .btn-loading {
+        color: transparent !important;
+        &:after {
+            content: '';
+            z-index: 999;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            @include radius(100%);
+            border: 2px solid #fff;
+            border-right: 2px solid transparent;
+            animation: spin 0.5s linear infinite;
+        }
+    }
+    .btn {
+        position: relative;
+        @include noselect;
+        @include defaultButton();
+        background-color: map-deep-get($colors, 'default', "default");
+        color: map-deep-get($colors, 'default', "text-color");
+        &:not(.btn-loading) {
+            &:hover {
+                background-color: map-deep-get($colors, 'default', "hover");
+            }
+            &:active {
+                background-color: map-deep-get($colors, 'default', "active");
+            }
+        }
+    }
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
 
     @each $index, $value in $colors {
         .btn-joint {
@@ -38,32 +74,136 @@
         }
         @each $i, $v in $input-sizes {
             @if($i=='m') {
+                @if($index == 'default') {
+                    .btn {
+                        height: $v;
+                        line-height: $v - 4px; 
+                        &.btn-loading {
+                            &:after {
+                                border-color: map-deep-get($colors, $index, "text-color");
+                                border-right-color: transparent;
+                            }
+                            &:not(.btn-loading) {
+                                &:hover {
+                                    background-color: map-deep-get($colors, $index, "hover");
+                                }
+                                &:active {
+                                    background-color: map-deep-get($colors, $index, "active");
+                                }
+                            } 
+                        }
+                        &:not(.btn-loading) {
+                            &:hover {
+                                background-color: map-deep-get($colors, $index, "hover");
+                            }
+                            &:active {
+                                background-color: map-deep-get($colors, $index, "active");
+                            }
+                        } 
+    
+                    }
+                }
                 .btn-#{$index} {
-                    @include defaultButton();
                     background-color: map-deep-get($colors, $index, "default");
                     color: map-deep-get($colors, $index, "text-color");
                     height: $v;
                     line-height: $v - 4px;
-                    &:hover {
-                        background-color: map-deep-get($colors, $index, "hover");
+                    &.btn-loading {
+                        &:after {
+                            border-color: map-deep-get($colors, $index, "text-color");
+                            border-right-color: transparent;
+                        }
+                        &:not(.btn-loading) {
+                            &:hover {
+                                background-color: map-deep-get($colors, $index, "hover");
+                            }
+                            &:active {
+                                background-color: map-deep-get($colors, $index, "active");
+                            }
+                        } 
                     }
-                    &:active {
-                        background-color: map-deep-get($colors, $index, "active");
+                    &:not(.btn-loading) {
+                        &:hover {
+                            background-color: map-deep-get($colors, $index, "hover");
+                        }
+                        &:active {
+                            background-color: map-deep-get($colors, $index, "active");
+                        }
+                    } 
+                }
+                .btn-joint {
+                    div, li, ul {
+                        &:first-child {
+                            .btn-outline-#{$index} {
+                                border-right: none;
+                            }
+                        }
+                        &:last-child {
+                            .btn-outline-#{$index} {
+                                border-left: none;
+                            }
+                        }
+                        :not(:last-child), :not(:first-child) {
+                            .btn-outline-#{$index} {
+                                border-left: none;
+                                border-right: none;
+                            }
+                        }
+                    }
+                }
+                .btn-outline-#{$index} {
+                    @include defaultButton();
+                    background-color: transparent;
+                    color: map-deep-get($colors, $index, "default");
+                    border: 2px solid map-deep-get($colors, $index, "default");
+                    height: $v;
+                    line-height: $v - 4px;
+                    &.btn-loading {
+                        &:after {
+                            border-color: map-deep-get($colors, $index, "default");
+                            border-right-color: transparent;
+                        }
+                    }
+                    &:not(.btn-loading) {
+                        &:hover {
+                            color: map-deep-get($colors, $index, "text-color");
+                            border-color: map-deep-get($colors, $index, "hover");
+                            background-color: map-deep-get($colors, $index, "hover");
+                        }
+                        &:active {
+                            color: map-deep-get($colors, $index, "text-color");
+                            border-color: map-deep-get($colors, $index, "active");
+                            background-color: map-deep-get($colors, $index, "active");
+                        }
                     }
                 }
             } @else {
+                @if($index == 'default') {
+                    .btn-#{$i} {
+                        height: $v;
+                        line-height: $v - 4px; 
+                        &.btn-loading {
+                            &:after {
+                                border-color: map-deep-get($colors, $index, "text-color");
+                                border-right-color: transparent;
+                            }
+                            &:not(.btn-loading) {
+                                &:hover {
+                                    background-color: map-deep-get($colors, $index, "hover");
+                                }
+                                &:active {
+                                    background-color: map-deep-get($colors, $index, "active");
+                                }
+                            } 
+                        }
+    
+                    }
+                }
                 .btn-#{$i}-#{$index} {
-                    @include defaultButton();
                     background-color: map-deep-get($colors, $index, "default");
                     color: map-deep-get($colors, $index, "text-color");
                     height: $v;
                     line-height: $v - 4px;
-                    &:hover {
-                        background-color: map-deep-get($colors, $index, "hover");
-                    }
-                    &:active {
-                        background-color: map-deep-get($colors, $index, "active");
-                    }
                 }
             }
         }

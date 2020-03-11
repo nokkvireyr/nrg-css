@@ -16,6 +16,11 @@ $success-color-active: #4daa3f;
 $alert-color: #d83838;
 $alert-color-hover: #c93636;
 $alert-color-active: #b63232;
+//Default color
+$default-color: #eaeaea;
+$default-color-hover: #dddddd;
+$default-color-active: #d1d1d1;
+
 
 //Media Sizes
 $xs: 0;
@@ -27,6 +32,12 @@ $xxl: 1500px;
 
 //Colors
 $colors:(
+  default: (
+    default: $default-color,
+    hover: $default-color-hover,
+    active: $default-color-active,
+    text-color: $default-text-color
+  ),
   prime: (
     default: $prime-color,
     hover: $prime-color-hover,
