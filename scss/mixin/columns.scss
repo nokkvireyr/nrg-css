@@ -14,6 +14,23 @@
     padding-right: 0 !important;
 }
 
+@mixin aspect($paddingperc) {
+	position: relative;
+	padding-bottom: $paddingperc;
+	overflow: hidden;
+	img, iframe, embed, .fakeimg {
+		position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+	img, .fakeimg {
+		top: 0;
+		height: auto !important;
+	}
+}
+
 @mixin columns($col: $columns_count) {
     .rows {
         width: 100%;
@@ -40,7 +57,17 @@
         max-width: 100%;
         padding-left: 6px;
         padding-right: 6px;
+        .col-aspect-square {
+            @include aspect(100%);
+        }
+        .col-aspect-16-9 {
+            @include aspect(56.25%);
+        }
+        .col-aspect-4-3 {
+            @include aspect(75%);
+        }
     }
+
     .col-fit {
         flex: 0 0 auto;
         width: auto;
@@ -87,6 +114,9 @@
         }
     }
     @each $index, $value in $media_points {
+        .col-#{$index}-33 {
+            @include makeColumn(33.333333%, 100%);
+        }
         @for $i from 1 through $columns_count {
             .col-#{$index} {
                 flex: 1 0 auto;
@@ -107,6 +137,10 @@
             }
             @if ($index != 'xs') {
                 @include media_queries($value) {
+                    .col-#{$index}-33 {
+                        flex: 0 0 100%;
+                        max-width: 100%;
+                    }
                     .col-#{$index}-#{$i} {
                         flex: 0 0 100%;
                         max-width: 100%;
